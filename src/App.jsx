@@ -53,7 +53,7 @@ export default function App() {
         <div className="wrap">
           <header>
             <div>
-              <div className="badge">CHEE · 새로운 시작</div>
+              <div className="badge">CHEE · 새로운 시작 2</div>
               <h1>당신의 하루를 더 선명하게 만드는 메인 페이지</h1>
               <p className="lede">
                 직관적인 정보, 가볍게 눌러보는 CTA, 그리고 브랜드 스토리가 담긴 한 화면.
