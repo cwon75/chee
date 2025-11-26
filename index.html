@@ -2,10 +2,294 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>나의 첫 GitHub Pages 홈페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHEE | 메인</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f1629;
+            --bg-accent: #172038;
+            --primary: #6cf1d6;
+            --secondary: #8ea3ff;
+            --text: #e6ebff;
+            --muted: #9db0d8;
+            --card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: 0 10px 30px rgba(108, 241, 214, 0.25);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 20%, rgba(108, 241, 214, 0.1), transparent 30%),
+                        radial-gradient(circle at 80% 10%, rgba(142, 163, 255, 0.12), transparent 30%),
+                        radial-gradient(circle at 50% 80%, rgba(108, 241, 214, 0.08), transparent 35%),
+                        var(--bg);
+            color: var(--text);
+            font-family: 'Noto Sans KR', 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+        .noise {
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            mix-blend-mode: screen;
+            z-index: 0;
+        }
+        main {
+            position: relative;
+            z-index: 1;
+        }
+        .wrap {
+            width: min(1200px, 92vw);
+            margin: 0 auto;
+            padding: 48px 0 80px;
+        }
+        header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            align-items: center;
+            padding: 36px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--glow);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        h1 {
+            margin: 12px 0 10px;
+            font-size: clamp(32px, 4vw, 44px);
+            letter-spacing: -0.02em;
+        }
+        .lede {
+            margin: 0;
+            font-size: 18px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .btn {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+            font-size: 15px;
+            color: var(--text);
+            background: var(--card);
+        }
+        .btn.primary {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: #0a0f1c;
+            border-color: transparent;
+            box-shadow: var(--glow);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.16);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+        }
+        .summary-card {
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .section {
+            margin-top: 48px;
+        }
+        .section h2 {
+            margin: 0 0 12px;
+            font-size: 22px;
+        }
+        .section p {
+            margin: 0 0 18px;
+            color: var(--muted);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+        .card {
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.16);
+            box-shadow: var(--glow);
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            gap: 6px;
+        }
+        .stat {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+        }
+        .timeline {
+            display: grid;
+            gap: 14px;
+        }
+        .timeline-item {
+            display: grid;
+            gap: 6px;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .footer {
+            margin-top: 48px;
+            padding: 18px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            text-align: center;
+        }
+        @media (max-width: 720px) {
+            header { padding: 24px; }
+            .wrap { padding-top: 32px; }
+            .cta { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
 </head>
 <body>
-    <h1>안녕하세요! GitHub Pages에 오신 것을 환영합니다!</h1>
-    <p>이것이 나의 무료 홈페이지입니다.</p>
+    <div class="noise" aria-hidden="true"></div>
+    <main>
+        <div class="wrap" id="root"></div>
+    </main>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const highlights = [
+            { title: '반응형 UX', desc: '데스크톱부터 모바일까지 자연스럽게 이어지는 유연한 인터페이스.' },
+            { title: '브랜드 스토리', desc: 'CHEE가 풀고 싶은 문제와 가치를 한눈에 확인하세요.' },
+            { title: '빠른 접근', desc: 'CTA 버튼으로 바로 문의하거나, 소개 자료를 내려받을 수 있습니다.' },
+        ];
+
+        const stats = [
+            { label: '프로젝트 준비율', value: '82%', pill: '현재 진행' },
+            { label: '파트너 네트워크', value: '24+', pill: '함께하는 팀' },
+            { label: '사용자 관심도', value: '1.2K', pill: '사전 알림' },
+        ];
+
+        const roadmap = [
+            { period: '지금', title: '브랜드 톤 확정', detail: '웹 가이드와 색상, 서체 시스템을 정리하고 있습니다.' },
+            { period: '2월', title: '알파 공개', detail: '피드백 기반으로 메인 기능을 검증하고 개선합니다.' },
+            { period: 'Q2', title: '정식 런칭', detail: '안정화된 경험과 함께 커뮤니티 채널을 열 예정입니다.' },
+        ];
+
+        function App() {
+            return (
+                <>
+                    <header>
+                        <div>
+                            <div className="badge">CHEE · 새로운 시작</div>
+                            <h1>당신의 하루를 더 선명하게 만드는 메인 페이지</h1>
+                            <p className="lede">
+                                직관적인 정보, 가볍게 눌러보는 CTA, 그리고 브랜드 스토리가 담긴 한 화면.
+                                CHEE의 방향성을 React로 재구성했습니다.
+                            </p>
+                            <div className="cta">
+                                <button className="btn primary">바로 보기</button>
+                                <button className="btn">소개 자료 받기</button>
+                            </div>
+                        </div>
+                        <div className="summary-card">
+                            <div className="pill">요약</div>
+                            <p style={{margin: '12px 0', color: 'var(--muted)'}}>
+                                새로운 CHEE 홈은 현대적인 톤과 부드러운 모션에 집중했습니다.
+                                한눈에 핵심을 파악하고 다음 행동을 선택하도록 설계했습니다.
+                            </p>
+                            <div className="grid" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))'}}>
+                                {stats.map((item) => (
+                                    <div key={item.label} className="card" style={{padding: '12px'}}>
+                                        <div className="pill" style={{marginBottom: '8px'}}>{item.pill}</div>
+                                        <div className="stat">{item.value}</div>
+                                        <div style={{color: 'var(--muted)', marginTop: '4px'}}>{item.label}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </header>
+
+                    <section className="section">
+                        <h2>핵심 포인트</h2>
+                        <p>짧은 텍스트와 명확한 대비로 브랜드 메시지를 빠르게 전달합니다.</p>
+                        <div className="grid">
+                            {highlights.map((item) => (
+                                <article key={item.title} className="card">
+                                    <div className="pill" style={{marginBottom: '10px'}}>Design</div>
+                                    <h3 style={{margin: '0 0 8px', fontSize: '18px'}}>{item.title}</h3>
+                                    <p style={{margin: 0, color: 'var(--muted)', lineHeight: 1.6}}>{item.desc}</p>
+                                </article>
+                            ))}
+                        </div>
+                    </section>
+
+                    <section className="section">
+                        <h2>앞으로의 로드맵</h2>
+                        <p>CHEE가 준비 중인 단계들을 한눈에 볼 수 있습니다.</p>
+                        <div className="timeline">
+                            {roadmap.map((item) => (
+                                <div key={item.title} className="timeline-item">
+                                    <div className="pill">{item.period}</div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <h3 style={{margin: 0}}>{item.title}</h3>
+                                        <span style={{color: 'var(--secondary)', fontWeight: 600}}>→</span>
+                                    </div>
+                                    <p style={{margin: 0, color: 'var(--muted)', lineHeight: 1.5}}>{item.detail}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <div className="footer">
+                        © {new Date().getFullYear()} CHEE. 새로운 경험을 준비하는 모든 순간을 기록합니다.
+                    </div>
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
 </html>
